@@ -16,6 +16,23 @@ import lombok.experimental.SuperBuilder;
 @JsonInclude(content = Include.NON_DEFAULT)
 public class HttpResponse implements Serializable 
 {
+	public HttpResponse(int value, 
+			String message2, 
+			String description) 
+	{
+		this.statusCode = value;
+		this.message = message2;
+		this.devloperMessage = description;
+	}
+	
+	
+	
+	public HttpResponse() {
+		super();
+	}
+
+
+
 	private static final long serialVersionUID = 1L;	
 	protected String timeStamp;
 	protected int statusCode;
@@ -24,4 +41,5 @@ public class HttpResponse implements Serializable
 	protected String message;
 	protected String devloperMessage;
 	protected Map<?,?> data;
+	protected String path;
 }
