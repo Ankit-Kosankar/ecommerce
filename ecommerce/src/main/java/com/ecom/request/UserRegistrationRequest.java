@@ -12,15 +12,15 @@ public class UserRegistrationRequest implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@NotNull
+	@NotNull(message = "username cannot be null")
 	private String username;
 	
 	@NotNull
-	@Email
+	@Email(message = "Email cannot be null")
 	private String email;
 
 	@NotNull
-	@Size(min = 6, max = 20)
+	@Size(min = 6, max = 20, message = "The allowed length for password is 6Charcters  to 20character")
 	private String password;
 
 	@NotNull

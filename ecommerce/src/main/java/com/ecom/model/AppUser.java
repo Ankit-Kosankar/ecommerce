@@ -44,6 +44,9 @@ public class AppUser {
 	@Column(name = "is_active" , nullable = false)
 	private Boolean isActive;
 	
+	@Column(name = "is_verified" , nullable = false)
+	private Boolean isVerified;
+	
 	@Column(name = "created_date" , nullable = false)
 	private LocalDate createdDate;
 	

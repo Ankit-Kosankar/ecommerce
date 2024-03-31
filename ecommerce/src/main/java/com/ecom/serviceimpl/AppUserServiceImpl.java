@@ -1,5 +1,8 @@
 package com.ecom.serviceimpl;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +24,12 @@ public class AppUserServiceImpl implements AppUserService{
 	@Override
 	public AppUser createUser(UserRegistrationRequest userRegistrationRequest)
 	{
+		
 		AppUser convertToAppUserEntity = convertToAppUserEntity(userRegistrationRequest);
+		convertToAppUserEntity.setCreatedDate(LocalDate.now());
+		convertToAppUserEntity.setCreatedTime(LocalTime.now());
+		convertToAppUserEntity.setIsActive(true);
+		convertToAppUserEntity.setIsVerified(false);
 		return appUserRepository.save(convertToAppUserEntity);
 	}
 	
