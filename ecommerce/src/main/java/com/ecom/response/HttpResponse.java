@@ -1,6 +1,7 @@
 package com.ecom.response;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
@@ -42,4 +43,5 @@ public class HttpResponse implements Serializable
 	protected String devloperMessage;
 	protected Map<?,?> data;
 	protected String path;
+
 }

@@ -8,16 +8,18 @@ import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecom.model.AppUser;
 import com.ecom.request.UserRegistrationRequest;
 import com.ecom.response.HttpResponse;
+import com.ecom.response.PagedResponse;
 import com.ecom.service.AppUserService;
 
 import jakarta.validation.Valid;
@@ -65,5 +67,16 @@ public class AppUserController
 
 	}
 	
+	@GetMapping()
+	public ResponseEntity<?> getAllUsers(
+			@RequestParam(value = "page", defaultValue = "0",required = false) int page,
+            @RequestParam(value = "size", defaultValue = "10" , required = false) int size,
+            @RequestParam(value = "sortBy", defaultValue = "id" , required = false) String sortBy,
+            @RequestParam(value = "sortOrder", defaultValue = "ASC" ,required = false) String sortOrder
+            )
+	{
+		PagedResponse<AppUser> allUsers = appUserService.getAllUsers(page,size,sortBy,sortOrder);
+		return ResponseEntity.ok(allUsers);
+	}
 	
 }

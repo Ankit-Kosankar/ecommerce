@@ -2,6 +2,7 @@ package com.ecom.response;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ public class Response<T> implements Serializable
 	protected String message;
 	protected String devloperMessage;
 	protected Map<?,?> dataMap;
+	protected List<T> content;
 	
 	public Response(int statusCode, String message, T data) {
         this.statusCode = statusCode;
