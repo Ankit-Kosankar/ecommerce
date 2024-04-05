@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 
@@ -38,14 +40,17 @@ public class AppUser {
 	@Column(name = "mobile_number" , nullable = false , unique = true)
 	private String mobileNumber;
 	
-	@Column(name = "address" , nullable = false)
+	@Column(name = "address", nullable = true )
 	private String address;
 	
 	@Column(name = "is_active" , nullable = false)
-	private Boolean isActive;
+	private Boolean isActive = true;
 	
-	@Column(name = "is_verified" , nullable = false)
-	private Boolean isVerified;
+	@Column(name = "is_user_verified" , nullable = false)
+	private Boolean isVerified = false;
+	
+	@Column(name = "is_email_verified", nullable = false)
+	private Boolean isEmailVerified = false ;
 	
 	@Column(name = "created_date" , nullable = false)
 	private LocalDate createdDate;
@@ -53,14 +58,15 @@ public class AppUser {
 	@Column(name = "created_time" , nullable = false)
 	private LocalTime createdTime;
 	
-	@Column(name = "update_date")
+	@Column(name = "update_date" , nullable = true)
 	private LocalDate updatedDate;
 	
-	@Column(name = "updated_time")
+	@Column(name = "updated_time" , nullable = true)
 	private LocalTime updatedTime;
 	
-	@OneToOne
-	private Role role;
+	@ManyToOne //many to one relationship[many user can have one role]
+	@JoinColumn(name = "role_id") // Foreign key column in User table
+	private Role role; 
 	
 	@OneToOne
 	private Customer customer;

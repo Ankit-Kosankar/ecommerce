@@ -11,8 +11,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.ecom.enums.RoleEnum;
+import com.ecom.exception.RoleNotFoundException;
 import com.ecom.model.AppUser;
+import com.ecom.model.Role;
 import com.ecom.repository.AppUserRepository;
+import com.ecom.repository.RoleRepository;
 import com.ecom.request.UserRegistrationRequest;
 import com.ecom.response.PagedResponse;
 import com.ecom.service.AppUserService;
@@ -22,21 +26,33 @@ public class AppUserServiceImpl implements AppUserService{
 
 	private final ModelMapper modelMapper;
 	private final AppUserRepository appUserRepository;
-	public AppUserServiceImpl(AppUserRepository appUserRepository) {
+	private final RoleRepository roleRepository;
+	
+	public AppUserServiceImpl(AppUserRepository appUserRepository,RoleRepository roleRepository) {
 		this.appUserRepository = appUserRepository;
 		this.modelMapper = new ModelMapper();
+		this.roleRepository = roleRepository;
 	}
 
 	@Override
 	public AppUser createUser(UserRegistrationRequest userRegistrationRequest)
 	{
-		
-		AppUser convertToAppUserEntity = convertToAppUserEntity(userRegistrationRequest);
-		convertToAppUserEntity.setCreatedDate(LocalDate.now());
-		convertToAppUserEntity.setCreatedTime(LocalTime.now());
-		convertToAppUserEntity.setIsActive(true);
-		convertToAppUserEntity.setIsVerified(false);
-		return appUserRepository.save(convertToAppUserEntity);
+
+		Optional<Role> userRole = roleRepository.findByName(RoleEnum.USER);
+		if(userRole.isEmpty())
+		{
+			throw new RoleNotFoundException(RoleEnum.USER.toString());
+		}
+		else
+		{
+			AppUser convertToAppUserEntity = convertToAppUserEntity(userRegistrationRequest);
+			convertToAppUserEntity.setCreatedDate(LocalDate.now());
+			convertToAppUserEntity.setCreatedTime(LocalTime.now());
+			convertToAppUserEntity.setIsActive(true);
+			convertToAppUserEntity.setIsVerified(false);
+			convertToAppUserEntity.setRole(userRole.get());
+			return appUserRepository.save(convertToAppUserEntity);
+		}
 	}
 	
 	public AppUser convertToAppUserEntity(UserRegistrationRequest userRegistrationRequest)

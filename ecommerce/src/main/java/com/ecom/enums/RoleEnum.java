@@ -16,5 +16,9 @@ public enum RoleEnum
     /**
      * This indicates that the user is of role type merchant
      */
-    MERCHANT
+    MERCHANT,
+    
+    /**This indicates that the user is of role type merchant
+     */
+    SUPERADMIN
 }

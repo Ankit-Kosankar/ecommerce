@@ -29,5 +29,9 @@ public class UserRegistrationRequest implements Serializable {
 	@NotNull
 	private String lastName;
 	
+	@NotNull
+	@Size(min = 10, max = 10, message = "Only 10 digits are allowed")
+	private String mobileNumber;
+	
 	
 }
