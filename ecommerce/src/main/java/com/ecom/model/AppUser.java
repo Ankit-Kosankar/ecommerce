@@ -3,6 +3,7 @@ package com.ecom.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -68,6 +69,6 @@ public class AppUser {
 	@JoinColumn(name = "role_id") // Foreign key column in User table
 	private Role role; 
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Customer customer;
 }

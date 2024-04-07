@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ecom.dto.AppUserDTO;
 import com.ecom.model.AppUser;
 import com.ecom.request.UserRegistrationRequest;
 import com.ecom.response.HttpResponse;
@@ -75,7 +76,7 @@ public class AppUserController
             @RequestParam(value = "sortOrder", defaultValue = "ASC" ,required = false) String sortOrder
             )
 	{
-		PagedResponse<AppUser> allUsers = appUserService.getAllUsers(page,size,sortBy,sortOrder);
+		PagedResponse<AppUserDTO> allUsers = appUserService.getAllUsers(page,size,sortBy,sortOrder);
 		return ResponseEntity.ok(allUsers);
 	}
 	

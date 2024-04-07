@@ -12,12 +12,12 @@ spring:
 
     hibernate: 
       ddl-auto: update
-    
+      
     properties:
       hibernate:
         globally_quoted_identifiers: true
         format_sql: true
-     
+        
     open-in-view: false
     
   sql:
