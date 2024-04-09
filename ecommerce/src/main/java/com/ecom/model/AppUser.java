@@ -71,4 +71,5 @@ public class AppUser {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Customer customer;
+	
 }
