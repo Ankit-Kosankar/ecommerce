@@ -20,7 +20,7 @@ public class BrandController {
 
 	public ResponseEntity<?> addBrand(@RequestBody BrandDTO brandDTO)
 	{
-		
+		brandService.addBrand(brandDTO);
 		return null;
 	}
 	
